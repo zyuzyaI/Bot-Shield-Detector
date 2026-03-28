@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Bot Shield Detector",
+  "version": "1.0.0",
+  "description": "AI-powered detection of bot protection systems (Akamai, DataDome, Cloudflare, etc.) via headers, cookies, and page signals.",
+  "icons": {
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48.png"
+    },
+    "default_title": "Bot Shield Detector"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "storage",
+    "cookies",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": ["content.js"]
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bot Shield Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"
+                stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1>Bot Shield Detector</h1>
+        <p id="current-url" class="url-display">Loading...</p>
+      </div>
+      <button id="scan-btn" class="scan-btn" title="Re-scan page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M1 4v6h6M23 20v-6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Setup Panel -->
+    <div id="setup-panel" class="hidden">
+      <div id="setup-content"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="hidden">
+
+      <div id="idle-state" class="state-panel">
+        <div class="idle-icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p>Click <strong>Analyze</strong> to scan this page for bot protection systems.</p>
+        <div id="provider-badge" class="provider-badge"></div>
+        <button id="analyze-btn" class="btn-primary btn-large">Analyze Page</button>
+      </div>
+
+      <div id="loading-state" class="state-panel hidden">
+        <div class="scanner">
+          <div class="scanner-ring"></div>
+          <div class="scanner-ring ring2"></div>
+          <div class="scanner-dot"></div>
+        </div>
+        <p id="loading-msg" class="loading-msg">Collecting signals...</p>
+        <div class="progress-steps">
+          <div class="step" id="step-collect"><span class="step-dot"></span><span>Collecting headers &amp; cookies</span></div>
+          <div class="step" id="step-analyze"><span class="step-dot"></span><span>Querying AI model</span></div>
+          <div class="step" id="step-result"><span class="step-dot"></span><span>Processing results</span></div>
+        </div>
+      </div>
+
+      <div id="results-state" class="state-panel hidden">
+        <div id="results-container"></div>
+        <button id="re-analyze-btn" class="btn-secondary">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M1 4v6h6M23 20v-6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Re-analyze
+        </button>
+      </div>
+
+      <div id="error-state" class="state-panel hidden">
+        <div class="error-icon">⚠️</div>
+        <p id="error-msg">Something went wrong.</p>
+        <button id="retry-btn" class="btn-primary">Try Again</button>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <button id="settings-btn" class="footer-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"
+                stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+        Model Settings
+      </button>
+      <span class="footer-version">v1.1.0</span>
+    </footer>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
