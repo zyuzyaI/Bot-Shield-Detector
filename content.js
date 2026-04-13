@@ -80,40 +80,151 @@ const KNOWN_SIGNATURES = {
     emoji: "🟠",
     color: "#fb923c",
     logoClass: "logo-cloudflare",
-    headers: ["cf-ray", "cf-cache-status", "cf-request-id", "cf-connecting-ip", "cf-ipcountry"],
-    cookies: ["__cflb", "__cfduid", "cf_clearance", "__cf_bm", "_cfuvid"],
-    scripts: ["challenges.cloudflare.com", "/cdn-cgi/", "turnstile"],
-    globals: ["_cf_chl_opt", "ChallengeRunnerApp"],
+    headers: [
+      "cf-ray",
+      "cf-cache-status",
+      "cf-request-id",
+      "cf-connecting-ip",
+      "cf-ipcountry",
+      "cf-worker",
+      "cf-bot-management-score",
+      "x-content-type-options"
+    ],
+    cookies: [
+      "__cflb",
+      "__cfduid",
+      "cf_clearance",
+      "__cf_bm",
+      "_cfuvid",
+      "cf_ob_info",
+      "__cf_ch_"
+    ],
+    scripts: [
+      "challenges.cloudflare.com",
+      "/cdn-cgi/",
+      "turnstile",
+      "static.cloudflareinsights.com",
+      "challenges.cloudflare.com/cdn-cgi/challenge-platform"
+    ],
+    globals: [
+      "_cf_chl_opt",
+      "ChallengeRunnerApp",
+      "__cf",
+      "cf_clearance"
+    ]
   },
   akamai: {
     name: "Akamai Bot Manager",
     emoji: "🔵",
     color: "#60a5fa",
     logoClass: "logo-akamai",
-    headers: ["x-check-cacheable", "x-akamai-transformed", "x-akamai-request-id", "akamai-grn", "x-akamai-edgescape"],
-    cookies: ["bm_sz", "_abck", "ak_bmsc", "bm_mi", "bm_s", "bm_sv"],
-    scripts: ["akam/", "akadns.net", "akamai.com", "bmak"],
-    globals: ["bmak", "akamaiAA", "bm_sz", "sensor_data"],
+    headers: [
+      "x-check-cacheable",
+      "x-akamai-transformed",
+      "x-akamai-request-id",
+      "akamai-grn",
+      "x-akamai-edgescape",
+      "x-akamai-session-info",
+      "x-akamai-perf-analytic-v1",
+      "akamai-ghost"
+    ],
+    cookies: [
+      "bm_sz",
+      "_abck",
+      "ak_bmsc",
+      "bm_mi",
+      "bm_s",
+      "bm_sv",
+      "_abck_static",
+      "bm_sv_"
+    ],
+    scripts: [
+      "akam/",
+      "akadns.net",
+      "akamai.com",
+      "bmak",
+      "cdn.jsdelivr.net/npm/@akamai-waap",
+      "akam.akamaized.net"
+    ],
+    globals: [
+      "bmak",
+      "akamaiAA",
+      "bm_sz",
+      "sensor_data",
+      "AKAM"
+    ]
   },
   datadome: {
     name: "DataDome",
     emoji: "🟣",
     color: "#a78bfa",
     logoClass: "logo-datadome",
-    headers: ["x-datadome-request", "x-dd-b"],
-    cookies: ["datadome", "_dd", "dd_cookie_test"],
-    scripts: ["datadome.co", "dd.js", "tags.datadome.co"],
-    globals: ["DataDome", "_dd", "ddCaptcha"],
+    headers: [
+      "x-datadome-request",
+      "x-dd-b",
+      "x-datadome-cid",
+      "server: DataDome"
+    ],
+    cookies: [
+      "datadome",
+      "_dd",
+      "dd_cookie_test",
+      "_dd_session",
+      "_dd_browser"
+    ],
+    scripts: [
+      "datadome.co",
+      "dd.js",
+      "tags.datadome.co",
+      "loader.js",
+      "datadome/loader.min.js"
+    ],
+    globals: [
+      "DataDome",
+      "_dd",
+      "ddCaptcha",
+      "window.dd",
+      "dd"
+    ]
   },
   perimeterx: {
     name: "PerimeterX / HUMAN",
     emoji: "🟡",
     color: "#fbbf24",
     logoClass: "logo-perimeterx",
-    headers: ["x-px-enforcer-telemetry", "x-px-block-score"],
-    cookies: ["_px", "_px2", "_px3", "_pxvid", "pxcts", "_pxde"],
-    scripts: ["client.px-cloud.net", "captcha.px-cdn.net", "_pxAppId"],
-    globals: ["px", "_pxAppId", "PerimeterX", "PXReenforcement", "fngrprtd"],
+    headers: [
+      "x-px-enforcer-telemetry",
+      "x-px-block-score",
+      "x-px-token"
+    ],
+    cookies: [
+      "_px",
+      "_px2",
+      "_px3",
+      "_pxvid",
+      "pxcts",
+      "_pxde",
+      "_pxmvid",
+      "_pxhd",
+      "_pxff_",
+      "_pxttld"
+    ],
+    scripts: [
+      "client.px-cloud.net",
+      "captcha.px-cdn.net",
+      "_pxAppId",
+      "pxchk.net",
+      "px-cdn.net",
+      "px-client.net"
+    ],
+    globals: [
+      "px",
+      "_pxAppId",
+      "PerimeterX",
+      "PXReenforcement",
+      "fngrprtd",
+      "px_enforcer"
+    ]
   },
   recaptcha: {
     name: "Google reCAPTCHA",
@@ -121,21 +232,246 @@ const KNOWN_SIGNATURES = {
     color: "#64dcb4",
     logoClass: "logo-recaptcha",
     headers: [],
-    cookies: ["_grecaptcha", "NID"],
-    scripts: ["google.com/recaptcha", "gstatic.com/recaptcha", "recaptcha/api.js"],
-    globals: ["_grecaptcha", "grecaptcha"],
+    cookies: [
+      "_grecaptcha",
+      "NID",
+      "DSID"
+    ],
+    scripts: [
+      "google.com/recaptcha",
+      "gstatic.com/recaptcha",
+      "recaptcha/api.js",
+      "recaptcha__en.js"
+    ],
+    globals: [
+      "_grecaptcha",
+      "grecaptcha",
+      "recaptchaOnload"
+    ]
   },
   incapsula: {
-    name: "Imperva Incapsula",
+    name: "Imperva Incapsula / Cloud WAF",
     emoji: "🔴",
     color: "#f87171",
     logoClass: "logo-incapsula",
-    headers: ["x-iinfo", "x-cdn"],
-    cookies: ["incap_ses", "visid_incap", "nlbi_"],
-    scripts: ["incapsula.com", "imperva.com"],
-    globals: ["incap_ses", "visid_incap"],
+    headers: [
+      "x-iinfo",
+      "x-cdn",
+      "x-imperva-sc",
+      "x-imperva-rendered"
+    ],
+    cookies: [
+      "incap_ses",
+      "visid_incap",
+      "nlbi_",
+      "__imperva",
+      "imperva_session"
+    ],
+    scripts: [
+      "incapsula.com",
+      "imperva.com",
+      "_Incapsula_Resource",
+      "cdn.incapsula.com"
+    ],
+    globals: [
+      "incap_ses",
+      "visid_incap",
+      "__IMPERVADP"
+    ]
   },
+  awswaf: {
+    name: "AWS WAF / AWS Shield",
+    emoji: "🌩️",
+    color: "#f59e0b",
+    logoClass: "logo-awswaf",
+    headers: [
+      "x-amzn-waf-action",
+      "x-amzn-trace-id",
+      "x-amzn-errortype",
+      "x-amzn-requestid"
+    ],
+    cookies: [
+      "aws-waf-token",
+      "AWSWAF"
+    ],
+    scripts: [
+      "awswaf.com",
+      "waf.amazonaws.com",
+      "shield.amazonaws.com"
+    ],
+    globals: [
+      "AWSWAF",
+      "awsWafCaptcha",
+      "AWSWAFNetworkConfig"
+    ]
+  },
+  kasada: {
+    name: "Kasada",
+    emoji: "🦘",
+    color: "#10b981",
+    logoClass: "logo-kasada",
+    headers: [
+      "x-kpsdk-ct",
+      "x-kpsdk-cd",
+      "x-kpsdk-v",
+      "x-kpsdk-request-id"
+    ],
+    cookies: [
+      "_kpsdk_ct",
+      "_kpsdk_cd",
+      "_kpsdk_session"
+    ],
+    scripts: [
+      "kpsdk",
+      "149e9513-01fa-4fb0-aad4-566afd725d1b",
+      "kasada.io",
+      "kpsdk-core.min.js"
+    ],
+    globals: [
+      "KPSDK",
+      "KP_UID",
+      "ksensor",
+      "_kasada_"
+    ]
+  },
+  f5: {
+    name: "F5 BIG-IP / Shape Security",
+    emoji: "🛡️",
+    color: "#ef4444",
+    logoClass: "logo-f5",
+    headers: [
+      "x-sh-pointer",
+      "x-client-ip"
+    ],
+    cookies: [
+      "TS01",
+      "BIGipServer",
+      "_sh_",
+      "_shapebid"
+    ],
+    scripts: [
+      "shape.js",
+      "telemetry-profiling",
+      "shape-amd.js",
+      "telemetry.js"
+    ],
+    globals: [
+      "_sh_",
+      "shapesensor",
+      "shapeid",
+      "_shaperuntime"
+    ]
+  },
+  fastly: {
+    name: "Fastly",
+    emoji: "⚡",
+    color: "#dc2626",
+    logoClass: "logo-fastly",
+    headers: [
+      "x-fastly-request-id",
+      "fastly-client-ip",
+      "x-timer",
+      "x-served-by",
+      "x-cache",
+      "age"
+    ],
+    cookies: [],
+    scripts: [],
+    globals: []
+  },
+  netacea: {
+    name: "Netacea",
+    emoji: "🤖",
+    color: "#8b5cf6",
+    logoClass: "logo-netacea",
+    headers: [
+      "x-netacea-bot-score",
+      "x-netacea-detection-id",
+      "x-netacea-request-id"
+    ],
+    cookies: [
+      "netacea_id",
+      "_netacea_session",
+      "nca_detection"
+    ],
+    scripts: [
+      "netacea.js",
+      "cdn.netacea.com",
+      "sensor.netacea.com",
+      "netacea/collector"
+    ],
+    globals: [
+      "netacea",
+      "NETACEA",
+      "_netacea_collector"
+    ]
+  },
+  radware: {
+    name: "Radware Bot Manager",
+    emoji: "🔐",
+    color: "#ea580c",
+    logoClass: "logo-radware",
+    headers: ["x-rdwr-request", "x-rdwr-waf"],
+    cookies: ["rbzid", "rbzsessionid"],
+    scripts: ["rdwr.js", "script/bot.js"],
+    globals: ["RadwareBotManager"]
+  },
+  barracuda: {
+    name: "Barracuda WAF",
+    emoji: "🚨",
+    color: "#ff6b6b",
+    logoClass: "logo-barracuda",
+    headers: [],
+    cookies: ["BNI__BARRACUDA_LB_COOKIE", "BNES_"],
+    scripts: [],
+    globals: []
+  },
+  paloalto: {
+    name: "Palo Alto Networks",
+    emoji: "🏔️",
+    color: "#ff5733",
+    logoClass: "logo-paloalto",
+    headers: [
+      "x-pan-status",
+      "x-pan-detected"
+    ],
+    cookies: [
+      "_pan_session",
+      "pan_waf"
+    ],
+    scripts: [
+      "palo-alto.js",
+      "cdn.paloaltonetworks.com"
+    ],
+    globals: [
+      "PaloAlto",
+      "pan_collector"
+    ]
+  },
+  azurewaap: {
+    name: "Microsoft Azure WAF",
+    emoji: "☁️",
+    color: "#0078d4",
+    logoClass: "logo-azure",
+    headers: ["x-ms-request-id", "x-ms-routing-name"],
+    cookies: ["ApplicationGatewayAffinity", "ApplicationGatewayAffinityCORS"],
+    scripts: [], 
+    globals: []
+  },
+  googlecloudarmor: {
+    name: "Google Cloud Armor",
+    emoji: "🛡️",
+    color: "#4285f4",
+    logoClass: "logo-gcp",
+    headers: [
+      "x-goog-ext-464b934-gca"
+    ],
+    cookies: [],
+    scripts: [],
+    globals: []
+  }
 };
+
 
 // ── App State ──
 let currentTab = null;
@@ -578,55 +914,6 @@ async function queryHuggingFace(system, user) {
   return JSON.parse(jsonMatch[0]);
 }
 
-async function queryOllama(system, user) {
-  const endpoint = (settings.endpoint || "http://localhost:11434").replace(/\/$/, "");
-
-  let res;
-  try {
-    res = await fetch(`${endpoint}/api/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: settings.localModel,
-        stream: false,
-        messages: [{ role: "system", content: system }, { role: "user", content: user }],
-        options: { temperature: 0.1, num_predict: 1500 },
-      }),
-    });
-  } catch (fetchErr) {
-    throw new Error(
-      `Cannot reach Ollama at ${endpoint}\n\n` +
-      `Make sure it's running:\n  ollama serve`
-    );
-  }
-
-  if (!res.ok) {
-    // 403 = Ollama is running but blocking cross-origin requests from the extension
-    if (res.status === 403) {
-      throw new Error(
-        `Ollama blocked the request (403 Forbidden).\n\n` +
-        `Ollama rejects requests from browser extensions by default.\n\n` +
-        `Fix — restart Ollama with this env variable:\n\n` +
-        `  macOS / Linux:\n` +
-        `  OLLAMA_ORIGINS="*" ollama serve\n\n` +
-        `  Windows (PowerShell):\n` +
-        `  $env:OLLAMA_ORIGINS="*"; ollama serve\n\n` +
-        `Or set it permanently in your shell profile.`
-      );
-    }
-    const e = await res.json().catch(() => ({}));
-    throw new Error(e?.error || `Ollama error ${res.status}`);
-  }
-
-  const data = await res.json();
-  const text = data?.message?.content || "";
-  if (!text) throw new Error("Empty response from Ollama — is the model pulled?\n  ollama pull " + (settings.localModel || "mistral"));
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error("Model did not return valid JSON.\nTry a better model: mistral, llama3.2, or phi3");
-  return JSON.parse(jsonMatch[0]);
-}
-
-// ── Render Results ──
 function renderResults(result) {
   const container = document.getElementById("results-container");
   container.innerHTML = "";
@@ -742,13 +1029,14 @@ function escapeHtml(str) {
 
 async function queryOllama(system, user) {
   const endpoint = (settings.endpoint || "http://localhost:11434").replace(/\/$/, "");
-  
+
   // 1. Create a controller to manage the wait time
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes (300,000ms)
+  const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes
 
+  let res;
   try {
-    const res = await fetch(`${endpoint}/api/chat`, {
+    res = await fetch(`${endpoint}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       signal: controller.signal, // 2. Attach the signal here
@@ -760,12 +1048,42 @@ async function queryOllama(system, user) {
       }),
     });
     
-    clearTimeout(timeoutId); // 3. Clear timeout if it succeeds
-    // ... rest of your existing logic
+    clearTimeout(timeoutId); // 3. Clear timeout if the fetch succeeds
   } catch (err) {
     if (err.name === 'AbortError') {
-      throw new Error("AI took too long to respond. Try pre-loading the model in terminal.");
+      throw new Error("Ollama took too long to respond (5-minute timeout). Try pre-loading the model in your terminal first.");
     }
-    throw err;
+    throw new Error(
+      `Cannot reach Ollama at ${endpoint}\n\n` +
+      `Make sure it's running:\n  ollama serve`
+    );
   }
+
+  if (!res.ok) {
+    // 403 = Ollama is running but blocking cross-origin requests from the extension
+    if (res.status === 403) {
+      throw new Error(
+        `Ollama blocked the request (403 Forbidden).\n\n` +
+        `Ollama rejects requests from browser extensions by default.\n\n` +
+        `Fix — restart Ollama with this env variable:\n\n` +
+        `  macOS / Linux:\n` +
+        `  OLLAMA_ORIGINS="*" ollama serve\n\n` +
+        `  Windows (PowerShell):\n` +
+        `  $env:OLLAMA_ORIGINS="*"; ollama serve\n\n` +
+        `Or set it permanently in your shell profile.`
+      );
+    }
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e?.error || `Ollama error ${res.status}`);
+  }
+
+  const data = await res.json();
+  const text = data?.message?.content || "";
+  
+  if (!text) throw new Error("Empty response from Ollama — is the model pulled?\n  ollama pull " + (settings.localModel || "mistral"));
+  
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) throw new Error("Model did not return valid JSON.\nTry a better model: mistral, llama3.2, or phi3");
+  
+  return JSON.parse(jsonMatch[0]);
 }
