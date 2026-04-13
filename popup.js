@@ -711,3 +711,10 @@ function setStep(active) {
 function escapeHtml(str) {
   return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
+
+document.getElementById('export-btn').addEventListener('click', () => {
+    const resultJSON = JSON.stringify(currentResults, null, 2);
+    navigator.clipboard.writeText(resultJSON)
+        .then(() => alert('Results copied to clipboard!'))
+        .catch(err => console.error('Failed to copy: ', err));
+});
